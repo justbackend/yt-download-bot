@@ -25,7 +25,6 @@ async def send_welcome(message: types.Message):
 @dp.message(F.text.startswith('https://youtube.com/shorts/'))
 async def download_youtube_shorts(message: types.Message, bot: Bot):
     url = message.text.strip()
-    waiting_message = await message.reply("Video yuklanmoqda...")
 
     try:
         ydl_opts = {
@@ -48,7 +47,6 @@ async def download_youtube_shorts(message: types.Message, bot: Bot):
             await message.reply(f"An error occurred: {e}")
 
         os.remove(file_path)
-        await waiting_message.delete()
         await message.delete()
     except Exception as e:
         logging.error(f"An error occurred: {e}")
