@@ -41,13 +41,11 @@ async def download_youtube_shorts(message: types.Message, bot: Bot):
             await bot.send_video(
                 chat_id=message.chat.id,
                 video=video,
-                caption=message.text,
             )
         except Exception as e:
-            await message.reply(f"An error occurred: {e}")
+            logging.error(f"An error occurred: {e}")
 
         os.remove(file_path)
-        await message.delete()
     except Exception as e:
         logging.error(f"An error occurred: {e}")
 
